@@ -32,7 +32,7 @@ principalDf = pd.DataFrame(data=principalComponents,
                            columns=['principal component 1', 'principal component 2'])
 finalDf = pd.concat([principalDf, data[['target']]], axis=1)
 
-fig = plt.figure(figsize=(16, 9))
+fig = plt.figure(figsize=(12, 7))
 ax = fig.add_subplot(1, 1, 1)
 ax.set_xlabel('Principal Component 1', fontsize=15)
 ax.set_ylabel('Principal Component 2', fontsize=15)
