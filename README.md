@@ -10,40 +10,45 @@ Source code bao gồm 3 folder:
 ##### **a.Vẽ Histogram:**
 - j_Histogram là script vẽ ra histogram từ danh sách các Jitter trên 1 đoạn âm thanh được chứa trong 1 file csv.
 Code phân loại các khung dữ liệu:
-```
+```ruby
 features = ['local', 'absolute', 'rap', 'ppq5', 'ddp']
 column_name = ['local', 'absolute', 'rap', 'ppq5', 'ddp', 'target']
 ```
 Code đọc từ file csv:
-```
+```ruby
 data = pd.read_csv(csv_file, names=column_name)
 data.plot(kind='bar')
 ```
 
 ##### **b.PCA:**
 Hàm Standardlize:
-```
+```ruby
 x = StandardScaler().fit_transform(x)
 ```
 Hàm chuyển 4 cột thành 2 cột:
-```
+```ruby
 pca = PCA(n_components=2)
 #Set number of components for PCA
 principalComponents = pca.fit_transform(x)
+
+#Transform data in x to fit into principal component
 principalDf = pd.DataFrame(data=principalComponents,
                            columns=['principal component 1', 'principal component 2'])
 finalDf = pd.concat([principalDf, data[['target']]], axis=1)
 ```
 Hàm vẽ Chart
-```
+```ruby
 fig = plt.figure(figsize=(12, 7))
 #Size of figure
+
 ax = fig.add_subplot(1, 1, 1)
 #Add number of rows, columns and indexs to figure
+
 ax.set_xlabel('Principal Component 1', fontsize=15)
 ax.set_ylabel('Principal Component 2', fontsize=15)
 ax.set_title('2 component PCA', fontsize=20)
 #Set labels and title for the figure
+
 targets = ['normal', 'patient']
 colors = ['g', 'r']
 for target, color in zip(targets, colors):
